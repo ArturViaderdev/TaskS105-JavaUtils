@@ -10,6 +10,7 @@ import java.util.Comparator;
 
 public class DirectoryExploration {
     private final String fileoutput = "sortida.txt";
+    private final String fileserialize = "objecte.ser";
     public DirectoryExploration()
     {
 
@@ -136,5 +137,17 @@ public class DirectoryExploration {
 
         br.close();
         reader.close();
+    }
+
+    public void serializeObject(Example example) throws IOException {
+
+        ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(fileserialize));
+        os.writeObject(example);
+    }
+
+    public Example deserializeobject() throws IOException, ClassNotFoundException {
+        ObjectInputStream oi = new ObjectInputStream(new FileInputStream(fileserialize));
+        Example example = (Example) oi.readObject();
+        return example;
     }
 }

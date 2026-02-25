@@ -1,5 +1,6 @@
 package Level1;
 
+import java.io.IOException;
 import java.util.InputMismatchException;
 
 public class Program {
@@ -80,6 +81,21 @@ public class Program {
                     directoryExploration.showFile(path);
                 } catch (Exception e) {
                     consoleui.showMessage(e.getMessage());
+                }
+                break;
+            case 5:
+                String name = "Artur";
+                int age = 43;
+                Example example = new Example(name,age);
+                consoleui.showMessage("Serialitzant objecte example");
+                consoleui.showExample(example);
+                try {
+                    directoryExploration.serializeObject(example);
+                    Example exampleb = directoryExploration.deserializeobject();
+                    consoleui.showMessage("Objecte deserialitzat des de arxiu.");
+                    consoleui.showExample(exampleb);
+                } catch (Exception e) {
+                    consoleui.showMessage("Error d'entrada sortida.");
                 }
                 break;
             default:

@@ -15,3 +15,7 @@ I made that the results of exploring a directory recursively are written to a fi
 ## Exercise 4
 
 I developed a method that shows the contents of a file by console.
+
+## Exercise 5
+
+I serialized and deserialized an object in a binary file.
