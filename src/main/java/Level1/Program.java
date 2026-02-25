@@ -53,7 +53,8 @@ public class Program {
                 path = consoleui.getString();
                 try
                 {
-                    directoryExploration.ListRecursive(path,0,false,true);
+
+                    directoryExploration.ListRecursive(path,0);
                 }
                 catch(Exception ex)
                 {
@@ -65,7 +66,8 @@ public class Program {
                 path = consoleui.getString();
                 try
                 {
-                    directoryExploration.ListRecursive(path,0,true,true);
+                    directoryExploration.setWritefile();
+                    directoryExploration.ListRecursive(path,0);
                     consoleui.showMessage("Procés completat.");
                 }
                 catch(Exception ex)

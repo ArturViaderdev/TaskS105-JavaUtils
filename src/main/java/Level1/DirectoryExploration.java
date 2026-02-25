@@ -11,9 +11,17 @@ import java.util.Comparator;
 public class DirectoryExploration {
     private final String fileoutput = "sortida.txt";
     private final String fileserialize = "objecte.ser";
+    private boolean writefile;
+    private boolean first;
+
     public DirectoryExploration()
     {
+        this.writefile = false;
+        this.first = true;
+    }
 
+    public void setWritefile() {
+        writefile = true;
     }
 
     private String spaces(int ident)
@@ -26,7 +34,7 @@ public class DirectoryExploration {
         return space;
     }
 
-    public void ListRecursive(String path,int ident,boolean writefile,boolean first) throws Exception{
+    public void ListRecursive(String path,int ident) throws Exception{
         File directory = new File(path);
         String description;
         String fulldescription="";
@@ -76,7 +84,7 @@ public class DirectoryExploration {
                     }
                     if(file.isDirectory())
                     {
-                        ListRecursive(file.getPath(),ident+1,writefile,false);
+                        ListRecursive(file.getPath(),ident+1);
                     }
                 }
             }
