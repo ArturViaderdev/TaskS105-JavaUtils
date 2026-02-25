@@ -11,3 +11,7 @@ I build a method that reads a folder recursively, shows the results ordered alph
 ## Exercise 3
 
 I made that the results of exploring a directory recursively are written to a file.
+
+## Exercise 4
+
+I developed a method that shows the contents of a file by console.

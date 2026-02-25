@@ -2,9 +2,7 @@ package Level1;
 
 import Level1.Exceptions.NotDirectoryException;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
+import java.io.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -121,5 +119,22 @@ public class DirectoryExploration {
             }
         });
         return files;
+    }
+
+    public void showFile(String path) throws Exception {
+        File file= new File(path);
+        FileReader reader = new FileReader(file);
+        BufferedReader br = new BufferedReader(reader);
+        String readed;
+        do {
+            readed=br.readLine();
+            if(readed!=null)
+            {
+                System.out.println(readed);
+            }
+        }while(readed != null);
+
+        br.close();
+        reader.close();
     }
 }

@@ -72,6 +72,16 @@ public class Program {
                     consoleui.showMessage(ex.getMessage());
                 }
                 break;
+            case 4:
+                consoleui.showMessage("Introdueix la ruta d'un fitxer.");
+                path = consoleui.getString();
+                try
+                {
+                    directoryExploration.showFile(path);
+                } catch (Exception e) {
+                    consoleui.showMessage(e.getMessage());
+                }
+                break;
             default:
                 consoleui.showIncorrectOption();
         }
