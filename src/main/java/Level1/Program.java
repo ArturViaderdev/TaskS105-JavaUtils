@@ -16,9 +16,9 @@ public class Program {
             try
             {
                 option = consoleui.showMenu();
-                if(option>=1 && option<=2){
-                    executeOption(option);
-                }
+
+                executeOption(option);
+
             }
             catch(InputMismatchException ex)
             {
@@ -52,13 +52,28 @@ public class Program {
                 path = consoleui.getString();
                 try
                 {
-                    directoryExploration.ListRecursive(path,0);
+                    directoryExploration.ListRecursive(path,0,false,true);
                 }
                 catch(Exception ex)
                 {
                     consoleui.showMessage(ex.getMessage());
                 }
                 break;
+            case 3:
+                consoleui.showMessage("Introdueix la ruta de un directori.");
+                path = consoleui.getString();
+                try
+                {
+                    directoryExploration.ListRecursive(path,0,true,true);
+                    consoleui.showMessage("Procés completat.");
+                }
+                catch(Exception ex)
+                {
+                    consoleui.showMessage(ex.getMessage());
+                }
+                break;
+            default:
+                consoleui.showIncorrectOption();
         }
     }
 }

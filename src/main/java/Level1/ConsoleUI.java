@@ -13,6 +13,7 @@ public class ConsoleUI {
         Scanner scanner = new Scanner(System.in);
         System.out.println("1-Llistar fitxers de un directori.");
         System.out.println("2-Llistar recursivament arbre de directoris.");
+        System.out.println("3-Llistar recursivament arbre de directoris i guarda en txt.");
         System.out.println("0-Sortir.");
         int option = scanner.nextInt();
         return option;

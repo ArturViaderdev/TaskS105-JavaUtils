@@ -2,13 +2,16 @@ package Level1;
 
 import Level1.Exceptions.NotDirectoryException;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Comparator;
 
 public class DirectoryExploration {
+    private final String fileoutput = "sortida.txt";
     public DirectoryExploration()
     {
 
@@ -24,9 +27,10 @@ public class DirectoryExploration {
         return space;
     }
 
-    public void ListRecursive(String path,int ident) throws Exception{
+    public void ListRecursive(String path,int ident,boolean writefile,boolean first) throws Exception{
         File directory = new File(path);
         String description;
+        String fulldescription="";
         if (directory.exists() && directory.isDirectory())
         {
             File[] files = directory.listFiles();
@@ -40,12 +44,40 @@ public class DirectoryExploration {
                     description = spacesident + file.getName() + " " + sdf.format(file.lastModified());
                     if(file.isFile())
                     {
-                        System.out.println(description);
+                        fulldescription = description + " Arxiu";
                     }
                     else if(file.isDirectory())
                     {
-                        System.out.println(description + " Directori");
-                        ListRecursive(file.getPath(),ident+1);
+                        fulldescription = description + " Directori";
+                    }
+                    if(writefile)
+                    {
+                        if(first)
+                        {
+                            FileWriter fw = new FileWriter(fileoutput,false);
+                            first = false;
+                            BufferedWriter bw = new BufferedWriter(fw);
+                            bw.write(fulldescription);
+                            bw.close();
+                            fw.close();
+                        }
+                        else
+                        {
+                            FileWriter fw = new FileWriter(fileoutput,true);
+                            BufferedWriter bw = new BufferedWriter(fw);
+                            bw.newLine();
+                            bw.write(fulldescription);
+                            bw.close();
+                            fw.close();
+                        }
+                    }
+                    else
+                    {
+                        System.out.println(fulldescription);
+                    }
+                    if(file.isDirectory())
+                    {
+                        ListRecursive(file.getPath(),ident+1,writefile,false);
                     }
                 }
             }
