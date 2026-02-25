@@ -1,0 +1,9 @@
+# Task S105 - Java Utils
+
+## Exercise 1
+
+I developed a class that reads the files and folders inside a directory and show the result by console ordered alphabetically.
+
+## Exercise 2
+
+I build a method that reads a folder recursively, shows the results ordered alphabetically, shows the last modified date and detects what is a file and what is a folder.

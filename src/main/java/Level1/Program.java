@@ -1,0 +1,64 @@
+package Level1;
+
+import java.util.InputMismatchException;
+
+public class Program {
+    ConsoleUI consoleui;
+    public Program()
+    {
+        consoleui = new ConsoleUI();
+    }
+
+    public void start()
+    {
+        int option=-1;
+        do {
+            try
+            {
+                option = consoleui.showMenu();
+                if(option>=1 && option<=2){
+                    executeOption(option);
+                }
+            }
+            catch(InputMismatchException ex)
+            {
+                consoleui.showIncorrectOption();
+            }
+        }while(option!=0);
+        consoleui.goodbyeMessage();
+    }
+
+    private void executeOption(int option)
+    {
+        DirectoryExploration directoryExploration = new DirectoryExploration();
+        String path;
+        switch(option)
+        {
+            case 1:
+
+                consoleui.showMessage("Introdueix la ruta de un directori.");
+                path = consoleui.getString();
+                try
+                {
+                    directoryExploration.ListDirectory(path);
+                }
+                catch(Exception ex)
+                {
+                    consoleui.showMessage(ex.getMessage());
+                }
+                break;
+            case 2:
+                consoleui.showMessage("Introdueix la ruta de un directori.");
+                path = consoleui.getString();
+                try
+                {
+                    directoryExploration.ListRecursive(path,0);
+                }
+                catch(Exception ex)
+                {
+                    consoleui.showMessage(ex.getMessage());
+                }
+                break;
+        }
+    }
+}
