@@ -1,7 +1,5 @@
 package Level3;
 
-import Level1.Exceptions.NotDirectoryException;
-
 import javax.crypto.SecretKey;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -9,6 +7,7 @@ import java.io.FileWriter;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Comparator;
+
 
 public class DirectoryExploration {
     private boolean encrypt;

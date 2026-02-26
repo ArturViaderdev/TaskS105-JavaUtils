@@ -16,9 +16,11 @@ public class Program {
     private void di() {
     }
 
+    /**
+     * Encode directory files
+     */
     public void encode()
     {
-
         try {
             CryptFiles cryptFiles = new CryptFiles();
             cryptFiles.generateAESKey();
@@ -32,10 +34,12 @@ public class Program {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
-
     }
 
+    /**
+     * Decode directory files
+     * @param key
+     */
     public void decode(String key)
     {
         try {

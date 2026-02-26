@@ -18,6 +18,10 @@ public class CryptFiles {
 
     }
 
+    /**
+     * Converts a String key to SecretKey to decode
+     * @param skey
+     */
     public void setKey(String skey)
     {
         byte[] decodedKey = Base64.getDecoder().decode(skey);
@@ -30,15 +34,31 @@ public class CryptFiles {
         return skey;
     }
 
+    /**
+     * Generates a random aes key
+     * @throws NoSuchAlgorithmException
+     */
     public void generateAESKey() throws NoSuchAlgorithmException {
         KeyGenerator keygen = KeyGenerator.getInstance("AES");
         keygen.init(256);
         secretKey = keygen.generateKey();
     }
 
+    /**
+     * Encrypts a file and deletes the original
+     * @param file
+     * @throws NoSuchPaddingException
+     * @throws NoSuchAlgorithmException
+     * @throws InvalidKeyException
+     * @throws IOException
+     * @throws IllegalBlockSizeException
+     * @throws BadPaddingException
+     * @throws InvalidAlgorithmParameterException
+     */
     public void encrypt(File file) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, IOException, IllegalBlockSizeException, BadPaddingException, InvalidAlgorithmParameterException {
         String encodedname = addsymbol(file.getPath());
         Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+        // I generate an IV for more securitu
         byte[] iv = new byte[16];
         SecureRandom sr = new SecureRandom();
         sr.nextBytes(iv);
@@ -66,6 +86,17 @@ public class CryptFiles {
         file.delete();
     }
 
+    /**
+     * Decrypts a file and deletes the encrypted file
+     * @param file
+     * @throws IOException
+     * @throws NoSuchPaddingException
+     * @throws NoSuchAlgorithmException
+     * @throws InvalidKeyException
+     * @throws IllegalBlockSizeException
+     * @throws BadPaddingException
+     * @throws InvalidAlgorithmParameterException
+     */
     public void decrypt(File file) throws IOException, NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, InvalidAlgorithmParameterException {
         String originalname = removesymbol(file.getPath());
         FileInputStream in = new FileInputStream((file));
@@ -98,6 +129,11 @@ public class CryptFiles {
         file.delete();
     }
 
+    /**
+     * Remove the first character of the filename
+     * @param path
+     * @return
+     */
     private String removesymbol(String path)
     {
         int cont=path.length()-1;
@@ -130,6 +166,11 @@ public class CryptFiles {
         return newpath;
     }
 
+    /**
+     * Add a _ character at the start of filename
+     * @param path
+     * @return
+     */
     private String addsymbol(String path)
     {
         int cont=path.length()-1;
