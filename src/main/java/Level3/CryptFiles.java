@@ -1,11 +1,14 @@
 package Level3;
 
 import javax.crypto.*;
+import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.PSource;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.*;
+import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.Base64;
 
 public class CryptFiles {
@@ -30,15 +33,20 @@ public class CryptFiles {
     public void generateAESKey() throws NoSuchAlgorithmException {
         KeyGenerator keygen = KeyGenerator.getInstance("AES");
         keygen.init(256);
-        SecretKey secretKey = keygen.generateKey();
+        secretKey = keygen.generateKey();
     }
 
-    public void encrypt(File file) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, IOException, IllegalBlockSizeException, BadPaddingException {
+    public void encrypt(File file) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, IOException, IllegalBlockSizeException, BadPaddingException, InvalidAlgorithmParameterException {
         String encodedname = addsymbol(file.getPath());
         Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-        cipher.init(Cipher.ENCRYPT_MODE,secretKey);
+        byte[] iv = new byte[16];
+        SecureRandom sr = new SecureRandom();
+        sr.nextBytes(iv);
+        IvParameterSpec ivSpec = new IvParameterSpec(iv);
+        cipher.init(Cipher.ENCRYPT_MODE,secretKey,ivSpec);
         FileInputStream inputStream = new FileInputStream(file);
         FileOutputStream outputStream = new FileOutputStream(new File(encodedname));
+        outputStream.write(iv);
         byte[] buffer = new byte[64];
         int bytesRead;
         while((bytesRead = inputStream.read(buffer))!=-1){
@@ -58,14 +66,22 @@ public class CryptFiles {
         file.delete();
     }
 
-    public void decrypt(File file) throws IOException, NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
+    public void decrypt(File file) throws IOException, NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, InvalidAlgorithmParameterException {
         String originalname = removesymbol(file.getPath());
         FileInputStream in = new FileInputStream((file));
         FileOutputStream out = new FileOutputStream(new File(originalname));
         byte[] ibuf = new byte[64];
         int len;
+        byte[] iv = new byte[16];
+        if(in.read(iv) !=16)
+        {
+            throw new IllegalStateException("No es pot llegir el iv del fitxer.");
+        }
+        IvParameterSpec ivSpec = new IvParameterSpec(iv);
+
         Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-        cipher.init(Cipher.DECRYPT_MODE,secretKey);
+
+        cipher.init(Cipher.DECRYPT_MODE,secretKey,ivSpec);
 
         while((len = in.read(ibuf))!=-1){
             byte[] obuf = cipher.update(ibuf,0,len);
