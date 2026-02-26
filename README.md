@@ -31,7 +31,10 @@ I parametrized the directory exploration with a properties file that indicates t
 ## Level 3
 
 I developed a program that encodes and decodes all the files of a directory with aes.
-Danger! Put a test directory. All the files will be encrypted.
+
+Warning! 
+
+Put a test directory. All the files will be encrypted.
 
 The program can encode large files. It uses a buffer.
 I used iv at the start of the file for avoid revealing patterns to decode without the key.
@@ -47,12 +50,19 @@ The second parameter is the directory.
 If you put decode the third parameter is the key.
 When you encode directory files the key will appear on console. You have to save this key to be able to decode the files.
 
-Examples of use
+Examples of use:
+
+Encode a directory
+```console
 java Main.java encode /home/fedorahp/Documentos/prova/
+```
+
+Decode a directory
+````
 java Main.java decode /home/fedorahp/Documentos/prova/ i/L9KGSIo71ofJiE5ZJUE86OeN5Fn+NlUPHVjr3y3ZE=
-
+```` 
 If you want you can compile the class files.
-
+````
 javac -d . -encoding UTF-8 *.java
-
+````
 
