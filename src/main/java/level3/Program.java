@@ -1,10 +1,5 @@
-package Level3;
-import javax.crypto.SecretKey;
-import java.io.File;
-import java.io.FileInputStream;
+package level3;
 import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
-import java.util.Properties;
 
 public class Program {
     private String directory;
@@ -29,8 +24,6 @@ public class Program {
             DirectoryExploration directoryExploration = new DirectoryExploration(true,cryptFiles);
             directoryExploration.ListRecursive(directory,0);
             System.out.println("Operació completada.");
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

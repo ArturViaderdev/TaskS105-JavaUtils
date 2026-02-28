@@ -1,4 +1,4 @@
-package Level3;
+package level3;
 
 public class Main {
     public static void main(String[] args)
@@ -13,10 +13,10 @@ public class Main {
             {
                 System.out.println("Instruccions.");
                 System.out.println("Paràmetre 1. Pot esser encode o decode.");
-                System.out.printf("Paràmetre 2. Directori a codificar o descodificar.");
+                System.out.println("Paràmetre 2. Directori a codificar o descodificar.");
                 System.out.println("En el cas de encode es generarà una clau i s'informarà al usuari. Guardar aquesta clau per a poder recuperar els arxius.");
                 System.out.println("En el cas de decode hem de introduïr un quart paràmetre.");
-                System.out.printf("Paràmetre 4. Key. Hem de posar la clau que hem obtingut al fer el encode.");
+                System.out.println("Paràmetre 4. Key. Hem de posar la clau que hem obtingut al fer el encode.");
             }
             else {
                 System.out.println("Paràmetres incorrectes");

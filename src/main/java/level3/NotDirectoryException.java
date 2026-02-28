@@ -1,4 +1,4 @@
-package Level1.Exceptions;
+package level3;
 
 public class NotDirectoryException extends Exception{
     public NotDirectoryException()

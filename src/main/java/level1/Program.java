@@ -1,6 +1,5 @@
-package Level1;
+package level1;
 
-import java.io.IOException;
 import java.util.InputMismatchException;
 
 public class Program {
@@ -66,7 +65,7 @@ public class Program {
                 path = consoleui.getString();
                 try
                 {
-                    directoryExploration.setWritefile();
+                    directoryExploration.setWriteFile();
                     directoryExploration.ListRecursive(path,0);
                     consoleui.showMessage("Procés completat.");
                 }
@@ -93,7 +92,7 @@ public class Program {
                 consoleui.showExample(example);
                 try {
                     directoryExploration.serializeObject(example);
-                    Example exampleb = directoryExploration.deserializeobject();
+                    Example exampleb = directoryExploration.deserializeObject();
                     consoleui.showMessage("Objecte deserialitzat des de arxiu.");
                     consoleui.showExample(exampleb);
                 } catch (Exception e) {

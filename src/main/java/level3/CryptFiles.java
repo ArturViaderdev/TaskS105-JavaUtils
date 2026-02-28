@@ -1,8 +1,7 @@
-package Level3;
+package level3;
 
 import javax.crypto.*;
 import javax.crypto.spec.IvParameterSpec;
-import javax.crypto.spec.PSource;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.*;
 import java.security.InvalidAlgorithmParameterException;
@@ -20,23 +19,23 @@ public class CryptFiles {
 
     /**
      * Converts a String key to SecretKey to decode
-     * @param skey
+     * @param sKey the key in a string
      */
-    public void setKey(String skey)
+    public void setKey(String sKey)
     {
-        byte[] decodedKey = Base64.getDecoder().decode(skey);
+        byte[] decodedKey = Base64.getDecoder().decode(sKey);
         secretKey = new SecretKeySpec(decodedKey,0,decodedKey.length,"AES");
     }
 
     public String getKey()
     {
-        String skey = Base64.getEncoder().encodeToString(secretKey.getEncoded());
-        return skey;
+        String sKey = Base64.getEncoder().encodeToString(secretKey.getEncoded());
+        return sKey;
     }
 
     /**
      * Generates a random aes key
-     * @throws NoSuchAlgorithmException
+     * @throws NoSuchAlgorithmException This error never happens because is AES
      */
     public void generateAESKey() throws NoSuchAlgorithmException {
         KeyGenerator keygen = KeyGenerator.getInstance("AES");
@@ -56,16 +55,16 @@ public class CryptFiles {
      * @throws InvalidAlgorithmParameterException
      */
     public void encrypt(File file) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, IOException, IllegalBlockSizeException, BadPaddingException, InvalidAlgorithmParameterException {
-        String encodedname = addsymbol(file.getPath());
+        String encodedName = addSymbol(file.getPath());
         Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-        // I generate an IV for more securitu
+        // I generate an IV for more security
         byte[] iv = new byte[16];
         SecureRandom sr = new SecureRandom();
         sr.nextBytes(iv);
         IvParameterSpec ivSpec = new IvParameterSpec(iv);
         cipher.init(Cipher.ENCRYPT_MODE,secretKey,ivSpec);
         FileInputStream inputStream = new FileInputStream(file);
-        FileOutputStream outputStream = new FileOutputStream(new File(encodedname));
+        FileOutputStream outputStream = new FileOutputStream(new File(encodedName));
         outputStream.write(iv);
         byte[] buffer = new byte[64];
         int bytesRead;
@@ -98,9 +97,9 @@ public class CryptFiles {
      * @throws InvalidAlgorithmParameterException
      */
     public void decrypt(File file) throws IOException, NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, InvalidAlgorithmParameterException {
-        String originalname = removesymbol(file.getPath());
+        String originalName = removeSymbol(file.getPath());
         FileInputStream in = new FileInputStream((file));
-        FileOutputStream out = new FileOutputStream(new File(originalname));
+        FileOutputStream out = new FileOutputStream(new File(originalName));
         byte[] ibuf = new byte[64];
         int len;
         byte[] iv = new byte[16];
@@ -134,12 +133,12 @@ public class CryptFiles {
      * @param path
      * @return
      */
-    private String removesymbol(String path)
+    private String removeSymbol(String path)
     {
         int cont=path.length()-1;
         boolean exit = false;
         boolean found = false;
-        String newpath="error";
+        String newPath="error";
         while(!exit)
         {
             if(cont>0)
@@ -161,9 +160,9 @@ public class CryptFiles {
         }
         if(found)
         {
-            newpath = path.substring(0,cont+1) + path.substring(cont+2,path.length());
+            newPath = path.substring(0,cont+1) + path.substring(cont+2,path.length());
         }
-        return newpath;
+        return newPath;
     }
 
     /**
@@ -171,12 +170,12 @@ public class CryptFiles {
      * @param path
      * @return
      */
-    private String addsymbol(String path)
+    private String addSymbol(String path)
     {
         int cont=path.length()-1;
         boolean exit = false;
         boolean found = false;
-        String newpath="error";
+        String newPath="error";
         while(!exit)
         {
             if(cont>0)
@@ -198,8 +197,8 @@ public class CryptFiles {
         }
         if(found)
         {
-            newpath = path.substring(0,cont+1) + "_" + path.substring(cont+1,path.length());
+            newPath = path.substring(0,cont+1) + "_" + path.substring(cont+1,path.length());
         }
-        return newpath;
+        return newPath;
     }
 }

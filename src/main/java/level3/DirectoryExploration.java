@@ -1,17 +1,13 @@
-package Level3;
+package level3;
 
 import javax.crypto.SecretKey;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Comparator;
 
 
 public class DirectoryExploration {
     private boolean encrypt;
-    private SecretKey secretKey;
     private CryptFiles cryptFiles;
     public DirectoryExploration(boolean encrypt, CryptFiles cryptFiles)
     {
@@ -31,17 +27,13 @@ public class DirectoryExploration {
 
     public void ListRecursive(String path,int ident) throws Exception{
         File directory = new File(path);
-        String description;
-        String fulldescription="";
-
         if (directory.exists() && directory.isDirectory())
         {
             File[] files = directory.listFiles();
             if(files!=null)
             {
-                File[] orderedfiles = orderFilesByName(files);
-                String spacesident = spaces(ident);
-                for(File file:orderedfiles)
+                File[] orderedFiles = orderFilesByName(files);
+                for(File file:orderedFiles)
                 {
 
                     if(file.isFile())

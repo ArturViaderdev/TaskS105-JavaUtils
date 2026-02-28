@@ -1,7 +1,6 @@
-package Level2;
+package level2;
 
-import Level1.Example;
-import Level1.Exceptions.NotDirectoryException;
+import level1.exceptions.NotDirectoryException;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
@@ -9,13 +8,13 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 public class DirectoryExploration {
-    private String fileoutput;
+    private String fileOutput;
     private boolean first;
 
-    public DirectoryExploration(String fileoutput)
+    public DirectoryExploration(String fileOutput)
     {
         this.first = true;
-        this.fileoutput = fileoutput;
+        this.fileOutput = fileOutput;
     }
 
     private String spaces(int ident)
@@ -31,42 +30,42 @@ public class DirectoryExploration {
     public void ListRecursive(String path,int ident) throws Exception{
         File directory = new File(path);
         String description;
-        String fulldescription="";
+        String fullDescription="";
         if (directory.exists() && directory.isDirectory())
         {
             File[] files = directory.listFiles();
             if(files!=null)
             {
-                File[] orderedfiles = orderFilesByName(files);
-                String spacesident = spaces(ident);
-                for(File file:orderedfiles)
+                File[] orderedFiles = orderFilesByName(files);
+                String spacesIdent = spaces(ident);
+                for(File file:orderedFiles)
                 {
                     SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-                    description = spacesident + file.getName() + " " + sdf.format(file.lastModified());
+                    description = spacesIdent + file.getName() + " " + sdf.format(file.lastModified());
                     if(file.isFile())
                     {
-                        fulldescription = description + " Arxiu";
+                        fullDescription = description + " Arxiu";
                     }
                     else if(file.isDirectory())
                     {
-                        fulldescription = description + " Directori";
+                        fullDescription = description + " Directori";
                     }
 
                     if(first)
                     {
-                        FileWriter fw = new FileWriter(fileoutput,false);
+                        FileWriter fw = new FileWriter(fileOutput,false);
                         first = false;
                         BufferedWriter bw = new BufferedWriter(fw);
-                        bw.write(fulldescription);
+                        bw.write(fullDescription);
                         bw.close();
                         fw.close();
                     }
                     else
                     {
-                        FileWriter fw = new FileWriter(fileoutput,true);
+                        FileWriter fw = new FileWriter(fileOutput,true);
                         BufferedWriter bw = new BufferedWriter(fw);
                         bw.newLine();
-                        bw.write(fulldescription);
+                        bw.write(fullDescription);
                         bw.close();
                         fw.close();
                     }
