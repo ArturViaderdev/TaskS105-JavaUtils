@@ -1,7 +1,10 @@
 package level2;
 
+import level1.exceptions.NotDirectoryException;
+
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.Properties;
 
 public class Program {
@@ -20,7 +23,7 @@ public class Program {
             DirectoryExploration directoryExploration = new DirectoryExploration((String) properties.getProperty("Resultat"));
             directoryExploration.ListRecursive(properties.getProperty("Directori"),0);
             System.out.println("Operació completada");
-        } catch (Exception e) {
+        } catch (NotDirectoryException | IOException e) {
             System.out.println(e.getMessage());
         }
     }

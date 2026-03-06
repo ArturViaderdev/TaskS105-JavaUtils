@@ -27,7 +27,7 @@ public class DirectoryExploration {
         return space;
     }
 
-    public void ListRecursive(String path,int ident) throws Exception{
+    public void ListRecursive(String path,int ident) throws NotDirectoryException,IOException{
         File directory = new File(path);
         String description;
         String fullDescription="";

@@ -33,7 +33,7 @@ public class DirectoryExploration {
         return space;
     }
 
-    public void ListRecursive(String path,int ident) throws Exception{
+    public void ListRecursive(String path,int ident) throws NotDirectoryException, IOException {
         File directory = new File(path);
         String description;
         String fullDescription="";
@@ -94,7 +94,7 @@ public class DirectoryExploration {
         }
     }
 
-    public void ListDirectory(String path) throws Exception {
+    public void ListDirectory(String path) throws NotDirectoryException {
         File directory = new File(path);
         if (directory.exists() && directory.isDirectory())
         {
@@ -129,7 +129,7 @@ public class DirectoryExploration {
         return files;
     }
 
-    public void showFile(String path) throws Exception {
+    public void showFile(String path) throws IOException {
         File file= new File(path);
         FileReader reader = new FileReader(file);
         BufferedReader br = new BufferedReader(reader);

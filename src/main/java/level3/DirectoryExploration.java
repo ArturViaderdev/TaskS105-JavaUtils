@@ -1,7 +1,14 @@
 package level3;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import java.io.File;
+import java.io.IOException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.Comparator;
 
@@ -25,7 +32,7 @@ public class DirectoryExploration {
         return space;
     }
 
-    public void ListRecursive(String path,int ident) throws Exception{
+    public void ListRecursive(String path,int ident) throws NotDirectoryException, IOException, InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
         File directory = new File(path);
         if (directory.exists() && directory.isDirectory())
         {

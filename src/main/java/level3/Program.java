@@ -1,5 +1,12 @@
 package level3;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import java.io.IOException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import javax.crypto.NoSuchPaddingException;
 
 public class Program {
     private String directory;
@@ -24,8 +31,9 @@ public class Program {
             DirectoryExploration directoryExploration = new DirectoryExploration(true,cryptFiles);
             directoryExploration.ListRecursive(directory,0);
             System.out.println("Operació completada.");
-        } catch (Exception e) {
+        } catch (NotDirectoryException | IOException | InvalidAlgorithmParameterException | NoSuchPaddingException | IllegalBlockSizeException | NoSuchAlgorithmException | BadPaddingException | InvalidKeyException e) {
             throw new RuntimeException(e);
+
         }
     }
 

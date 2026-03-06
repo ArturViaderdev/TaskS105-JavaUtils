@@ -1,5 +1,8 @@
 package level1;
 
+import level1.exceptions.NotDirectoryException;
+
+import java.io.IOException;
 import java.util.InputMismatchException;
 
 public class Program {
@@ -22,6 +25,7 @@ public class Program {
             }
             catch(InputMismatchException ex)
             {
+                consoleui.consumeNextLine();
                 consoleui.showIncorrectOption();
             }
         }while(option!=0);
@@ -37,31 +41,34 @@ public class Program {
             case 1:
 
                 consoleui.showMessage("Introdueix la ruta de un directori.");
+                consoleui.consumeNextLine();
                 path = consoleui.getString();
                 try
                 {
                     directoryExploration.ListDirectory(path);
                 }
-                catch(Exception ex)
+                catch(NotDirectoryException ex)
                 {
                     consoleui.showMessage(ex.getMessage());
                 }
                 break;
             case 2:
                 consoleui.showMessage("Introdueix la ruta de un directori.");
+                consoleui.consumeNextLine();
                 path = consoleui.getString();
                 try
                 {
 
                     directoryExploration.ListRecursive(path,0);
                 }
-                catch(Exception ex)
+                catch(NotDirectoryException | IOException ex)
                 {
                     consoleui.showMessage(ex.getMessage());
                 }
                 break;
             case 3:
                 consoleui.showMessage("Introdueix la ruta de un directori.");
+                consoleui.consumeNextLine();
                 path = consoleui.getString();
                 try
                 {
@@ -69,18 +76,19 @@ public class Program {
                     directoryExploration.ListRecursive(path,0);
                     consoleui.showMessage("Procés completat.");
                 }
-                catch(Exception ex)
+                catch(NotDirectoryException | IOException ex)
                 {
                     consoleui.showMessage(ex.getMessage());
                 }
                 break;
             case 4:
                 consoleui.showMessage("Introdueix la ruta d'un fitxer.");
+                consoleui.consumeNextLine();
                 path = consoleui.getString();
                 try
                 {
                     directoryExploration.showFile(path);
-                } catch (Exception e) {
+                } catch(IOException e){
                     consoleui.showMessage(e.getMessage());
                 }
                 break;
@@ -95,7 +103,7 @@ public class Program {
                     Example exampleb = directoryExploration.deserializeObject();
                     consoleui.showMessage("Objecte deserialitzat des de arxiu.");
                     consoleui.showExample(exampleb);
-                } catch (Exception e) {
+                } catch (IOException | ClassNotFoundException e) {
                     consoleui.showMessage("Error d'entrada sortida.");
                 }
                 break;
