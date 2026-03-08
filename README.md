@@ -232,7 +232,9 @@ to view the instructions.
 
     If you use decode, the third parameter is the key.
 
-    When you encode the directory files, the key will be shown in the console. You must save this key to be able to decode the files later.
+    When you encode the directory files, the key will be shown in the console. 
+
+    You must save this key to be able to decode the files later.
 
 **Examples of use:**
 
