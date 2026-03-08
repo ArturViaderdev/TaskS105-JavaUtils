@@ -221,9 +221,9 @@ java Main.java
 ```
 You can type:
 
-text
+```text
 java Main.java help
-
+```
 to view the instructions.
 
     The first parameter is encode or decode.
