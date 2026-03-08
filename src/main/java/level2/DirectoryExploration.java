@@ -1,6 +1,5 @@
 package level2;
 
-import level1.exceptions.NotDirectoryException;
 
 import java.io.*;
 import java.text.SimpleDateFormat;

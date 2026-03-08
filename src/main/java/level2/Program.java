@@ -1,6 +1,6 @@
 package level2;
 
-import level1.exceptions.NotDirectoryException;
+import level1.NotDirectoryException;
 
 import java.io.File;
 import java.io.FileInputStream;

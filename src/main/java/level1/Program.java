@@ -1,7 +1,5 @@
 package level1;
 
-import level1.exceptions.NotDirectoryException;
-
 import java.io.IOException;
 import java.util.InputMismatchException;
 

@@ -1,7 +1,5 @@
 package level1;
 
-import level1.exceptions.NotDirectoryException;
-
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
