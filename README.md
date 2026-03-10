@@ -20,13 +20,13 @@ The project is structured in three levels of increasing complexity.
             │   ├── ConsoleUI.java
             │   ├── DirectoryExploration.java
             │   ├── Example.java
-            │   ├── exceptions
-            │   │   └── NotDirectoryException.java
             │   ├── Main.java
+            │   ├── NotDirectoryException.java
             │   └── Program.java
             ├── level2
             │   ├── DirectoryExploration.java
             │   ├── Main.java
+            │   ├── NotDirectoryException.java
             │   └── Program.java
             └── level3
                 ├── CryptFiles.java
@@ -34,7 +34,7 @@ The project is structured in three levels of increasing complexity.
                 ├── Main.java
                 ├── NotDirectoryException.java
                 └── Program.java
-                
+
 ````
 
 ## 🚀 Instal.lation and Execution
