@@ -66,6 +66,7 @@ And execute the class file with
 ```
 java level3.Main
 ```
+Or run with IntelliJ IDEA.
 
 The level 3 need to be executed by console because it has arguments.
 
