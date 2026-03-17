@@ -21,6 +21,11 @@ public class DirectoryExploration {
         writeFile = true;
     }
 
+    public void unsetWriteFile()
+    {
+        writeFile = false;
+    }
+
     private String spaces(int ident)
     {
         String space = "";

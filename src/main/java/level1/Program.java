@@ -30,80 +30,104 @@ public class Program {
         consoleui.goodbyeMessage();
     }
 
+    private void scanDirectory(DirectoryExploration directoryExploration)
+    {
+        consoleui.showMessage("Introdueix la ruta de un directori.");
+        consoleui.consumeNextLine();
+        String path = consoleui.getString();
+        try
+        {
+            directoryExploration.unsetWriteFile();
+            directoryExploration.listDirectory(path);
+        }
+        catch(NotDirectoryException ex)
+        {
+            consoleui.showMessage(ex.getMessage());
+        }
+    }
+
+    private void scanDirectoryRecursive(DirectoryExploration directoryExploration)
+    {
+        consoleui.showMessage("Introdueix la ruta de un directori.");
+        consoleui.consumeNextLine();
+        String path = consoleui.getString();
+        try
+        {
+            directoryExploration.unsetWriteFile();
+            directoryExploration.listRecursive(path,0);
+        }
+        catch(NotDirectoryException | IOException ex)
+        {
+            consoleui.showMessage(ex.getMessage());
+        }
+    }
+
+    private void scanDirectoryRecursiveAndWriteToFile(DirectoryExploration directoryExploration)
+    {
+        consoleui.showMessage("Introdueix la ruta de un directori.");
+        consoleui.consumeNextLine();
+        String path = consoleui.getString();
+        try
+        {
+            directoryExploration.setWriteFile();
+            directoryExploration.listRecursive(path,0);
+            consoleui.showMessage("Procés completat.");
+        }
+        catch(NotDirectoryException | IOException ex)
+        {
+            consoleui.showMessage(ex.getMessage());
+        }
+    }
+
+    private void showFileInTheConsole(DirectoryExploration directoryExploration)
+    {
+        consoleui.showMessage("Introdueix la ruta d'un fitxer.");
+        consoleui.consumeNextLine();
+        String path = consoleui.getString();
+        try
+        {
+            directoryExploration.showFile(path);
+        } catch(IOException e){
+            consoleui.showMessage(e.getMessage());
+        }
+    }
+
+    private void serializeAndDeserializeObject(DirectoryExploration directoryExploration)
+    {
+        String name = "Artur";
+        int age = 43;
+        Example example = new Example(name,age);
+        consoleui.showMessage("Serialitzant objecte example");
+        consoleui.showExample(example);
+        try {
+            directoryExploration.serializeObject(example);
+            Example exampleb = directoryExploration.deserializeObject();
+            consoleui.showMessage("Objecte deserialitzat des de arxiu.");
+            consoleui.showExample(exampleb);
+        } catch (IOException | ClassNotFoundException e) {
+            consoleui.showMessage("Error d'entrada sortida.");
+        }
+    }
+
     private void executeOption(int option)
     {
         DirectoryExploration directoryExploration = new DirectoryExploration();
-        String path;
         switch(option)
         {
             case 1:
-
-                consoleui.showMessage("Introdueix la ruta de un directori.");
-                consoleui.consumeNextLine();
-                path = consoleui.getString();
-                try
-                {
-                    directoryExploration.listDirectory(path);
-                }
-                catch(NotDirectoryException ex)
-                {
-                    consoleui.showMessage(ex.getMessage());
-                }
+                scanDirectory(directoryExploration);
                 break;
             case 2:
-                consoleui.showMessage("Introdueix la ruta de un directori.");
-                consoleui.consumeNextLine();
-                path = consoleui.getString();
-                try
-                {
-
-                    directoryExploration.listRecursive(path,0);
-                }
-                catch(NotDirectoryException | IOException ex)
-                {
-                    consoleui.showMessage(ex.getMessage());
-                }
+                scanDirectoryRecursive(directoryExploration);
                 break;
             case 3:
-                consoleui.showMessage("Introdueix la ruta de un directori.");
-                consoleui.consumeNextLine();
-                path = consoleui.getString();
-                try
-                {
-                    directoryExploration.setWriteFile();
-                    directoryExploration.listRecursive(path,0);
-                    consoleui.showMessage("Procés completat.");
-                }
-                catch(NotDirectoryException | IOException ex)
-                {
-                    consoleui.showMessage(ex.getMessage());
-                }
+                scanDirectoryRecursiveAndWriteToFile(directoryExploration);
                 break;
             case 4:
-                consoleui.showMessage("Introdueix la ruta d'un fitxer.");
-                consoleui.consumeNextLine();
-                path = consoleui.getString();
-                try
-                {
-                    directoryExploration.showFile(path);
-                } catch(IOException e){
-                    consoleui.showMessage(e.getMessage());
-                }
+                showFileInTheConsole(directoryExploration);
                 break;
             case 5:
-                String name = "Artur";
-                int age = 43;
-                Example example = new Example(name,age);
-                consoleui.showMessage("Serialitzant objecte example");
-                consoleui.showExample(example);
-                try {
-                    directoryExploration.serializeObject(example);
-                    Example exampleb = directoryExploration.deserializeObject();
-                    consoleui.showMessage("Objecte deserialitzat des de arxiu.");
-                    consoleui.showExample(exampleb);
-                } catch (IOException | ClassNotFoundException e) {
-                    consoleui.showMessage("Error d'entrada sortida.");
-                }
+               serializeAndDeserializeObject(directoryExploration);
                 break;
             default:
                 consoleui.showIncorrectOption();
