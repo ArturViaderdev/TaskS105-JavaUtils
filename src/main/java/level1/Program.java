@@ -43,7 +43,7 @@ public class Program {
                 path = consoleui.getString();
                 try
                 {
-                    directoryExploration.ListDirectory(path);
+                    directoryExploration.listDirectory(path);
                 }
                 catch(NotDirectoryException ex)
                 {

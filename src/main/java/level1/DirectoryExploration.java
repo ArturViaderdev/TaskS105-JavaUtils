@@ -92,7 +92,7 @@ public class DirectoryExploration {
         }
     }
 
-    public void ListDirectory(String path) throws NotDirectoryException {
+    public void listDirectory(String path) throws NotDirectoryException {
         File directory = new File(path);
         if (directory.exists() && directory.isDirectory())
         {
