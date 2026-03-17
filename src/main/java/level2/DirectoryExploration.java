@@ -26,7 +26,7 @@ public class DirectoryExploration {
         return space;
     }
 
-    public void ListRecursive(String path,int ident) throws NotDirectoryException,IOException{
+    public void listRecursive(String path,int ident) throws NotDirectoryException,IOException{
         File directory = new File(path);
         String description;
         String fullDescription="";
@@ -70,7 +70,7 @@ public class DirectoryExploration {
                     }
                     if(file.isDirectory())
                     {
-                        ListRecursive(file.getPath(),ident+1);
+                        listRecursive(file.getPath(),ident+1);
                     }
                 }
             }

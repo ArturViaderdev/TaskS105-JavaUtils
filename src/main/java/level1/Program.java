@@ -57,7 +57,7 @@ public class Program {
                 try
                 {
 
-                    directoryExploration.ListRecursive(path,0);
+                    directoryExploration.listRecursive(path,0);
                 }
                 catch(NotDirectoryException | IOException ex)
                 {
@@ -71,7 +71,7 @@ public class Program {
                 try
                 {
                     directoryExploration.setWriteFile();
-                    directoryExploration.ListRecursive(path,0);
+                    directoryExploration.listRecursive(path,0);
                     consoleui.showMessage("Procés completat.");
                 }
                 catch(NotDirectoryException | IOException ex)
