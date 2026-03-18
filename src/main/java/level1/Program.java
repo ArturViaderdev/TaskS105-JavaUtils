@@ -35,7 +35,6 @@ public class Program {
         String path = consoleui.getString();
         try
         {
-            directoryExploration.unsetWriteFile();
             directoryExploration.listDirectory(path);
         }
         catch(NotDirectoryException ex)
@@ -51,7 +50,6 @@ public class Program {
         String path = consoleui.getString();
         try
         {
-            directoryExploration.unsetWriteFile();
             directoryExploration.listRecursive(path,0);
         }
         catch(NotDirectoryException | IOException ex)
@@ -65,9 +63,9 @@ public class Program {
         consoleui.showMessage("Introdueix la ruta de un directori.");
         consoleui.consumeNextLine();
         String path = consoleui.getString();
+        directoryExploration.setWriteFile();
         try
         {
-            directoryExploration.setWriteFile();
             directoryExploration.listRecursive(path,0);
             consoleui.showMessage("Procés completat.");
         }
