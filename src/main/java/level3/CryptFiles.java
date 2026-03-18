@@ -64,20 +64,19 @@ public class CryptFiles {
         IvParameterSpec ivSpec = new IvParameterSpec(iv);
         cipher.init(Cipher.ENCRYPT_MODE,secretKey,ivSpec);
         try(FileInputStream inputStream = new FileInputStream(file);
-            FileOutputStream outputStream = new FileOutputStream(new File(encodedName));)
-        {
+            FileOutputStream outputStream = new FileOutputStream(new File(encodedName));) {
+
             outputStream.write(iv);
             byte[] buffer = new byte[64];
             int bytesRead;
-            while((bytesRead = inputStream.read(buffer))!=-1){
-                byte[] output = cipher.update(buffer,0,bytesRead);
-                if(output!=null)
-                {
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                byte[] output = cipher.update(buffer, 0, bytesRead);
+                if (output != null) {
                     outputStream.write(output);
                 }
             }
             byte[] outputBytes = cipher.doFinal();
-            if(outputBytes!=null){
+            if (outputBytes != null) {
                 outputStream.write(outputBytes);
             }
         }
@@ -100,28 +99,24 @@ public class CryptFiles {
         byte[] ibuf = new byte[64];
         int len;
         byte[] iv = new byte[16];
-        IvParameterSpec ivSpec = new IvParameterSpec(iv);
-        Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-        cipher.init(Cipher.DECRYPT_MODE,secretKey,ivSpec);
-
-        try(FileInputStream in = new FileInputStream((file));
-            FileOutputStream out = new FileOutputStream(new File(originalName));) {
-            if(in.read(iv) !=16)
-            {
+        try(FileInputStream in = new FileInputStream((file)); FileOutputStream out = new FileOutputStream(new File(originalName));) {
+            if (in.read(iv) != 16) {
                 throw new IllegalStateException("No es pot llegir el iv del fitxer.");
             }
+            IvParameterSpec ivSpec = new IvParameterSpec(iv);
 
+            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
 
-            while((len = in.read(ibuf))!=-1){
-                byte[] obuf = cipher.update(ibuf,0,len);
-                if(obuf!=null)
-                {
+            cipher.init(Cipher.DECRYPT_MODE, secretKey, ivSpec);
+
+            while ((len = in.read(ibuf)) != -1) {
+                byte[] obuf = cipher.update(ibuf, 0, len);
+                if (obuf != null) {
                     out.write(obuf);
                 }
             }
             byte[] obuf = cipher.doFinal();
-            if(obuf!=null)
-            {
+            if (obuf != null) {
                 out.write(obuf);
             }
         }
