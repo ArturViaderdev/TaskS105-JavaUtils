@@ -63,21 +63,21 @@ public class DirectoryExploration {
                     {
                         if(first)
                         {
-                            FileWriter fw = new FileWriter(fileOutput,false);
                             first = false;
-                            BufferedWriter bw = new BufferedWriter(fw);
-                            bw.write(fullDescription);
-                            bw.close();
-                            fw.close();
+                            try(FileWriter fw = new FileWriter(fileOutput,false);
+                                BufferedWriter bw = new BufferedWriter(fw);)
+                            {
+                                bw.write(fullDescription);
+                            }
                         }
                         else
                         {
-                            FileWriter fw = new FileWriter(fileOutput,true);
-                            BufferedWriter bw = new BufferedWriter(fw);
-                            bw.newLine();
-                            bw.write(fullDescription);
-                            bw.close();
-                            fw.close();
+                            try(FileWriter fw = new FileWriter(fileOutput,true);
+                                BufferedWriter bw = new BufferedWriter(fw);)
+                            {
+                                bw.newLine();
+                                bw.write(fullDescription);
+                            }
                         }
                     }
                     else
@@ -134,23 +134,20 @@ public class DirectoryExploration {
 
     public void showFile(String path) throws IOException {
         File file= new File(path);
-        FileReader reader = new FileReader(file);
-        BufferedReader br = new BufferedReader(reader);
         String readed;
-        do {
-            readed=br.readLine();
-            if(readed!=null)
-            {
-                System.out.println(readed);
-            }
-        }while(readed != null);
-
-        br.close();
-        reader.close();
+        try(FileReader reader = new FileReader(file);
+            BufferedReader br = new BufferedReader(reader);)
+        {
+            do {
+                readed = br.readLine();
+                if (readed != null) {
+                    System.out.println(readed);
+                }
+            } while (readed != null);
+        }
     }
 
     public void serializeObject(Example example) throws IOException {
-
         ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(fileSerialize));
         os.writeObject(example);
     }

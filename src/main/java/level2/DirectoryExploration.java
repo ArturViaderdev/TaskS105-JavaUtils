@@ -52,21 +52,19 @@ public class DirectoryExploration {
 
                     if(first)
                     {
-                        FileWriter fw = new FileWriter(fileOutput,false);
                         first = false;
-                        BufferedWriter bw = new BufferedWriter(fw);
-                        bw.write(fullDescription);
-                        bw.close();
-                        fw.close();
+                        try(FileWriter fw = new FileWriter(fileOutput,false);
+                            BufferedWriter bw = new BufferedWriter(fw);) {
+                            bw.write(fullDescription);
+                        }
                     }
                     else
                     {
-                        FileWriter fw = new FileWriter(fileOutput,true);
-                        BufferedWriter bw = new BufferedWriter(fw);
-                        bw.newLine();
-                        bw.write(fullDescription);
-                        bw.close();
-                        fw.close();
+                        try(FileWriter fw = new FileWriter(fileOutput,true);
+                            BufferedWriter bw = new BufferedWriter(fw);) {
+                            bw.newLine();
+                            bw.write(fullDescription);
+                        }
                     }
                     if(file.isDirectory())
                     {

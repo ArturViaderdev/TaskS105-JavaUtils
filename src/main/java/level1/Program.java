@@ -17,9 +17,7 @@ public class Program {
             try
             {
                 option = consoleui.showMenu();
-
                 executeOption(option);
-
             }
             catch(InputMismatchException ex)
             {
